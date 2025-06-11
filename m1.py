@@ -84,6 +84,13 @@ try:
                 "FertilizerDetailsList": [],
                 "SeedDetailsList": [],
                 "InsecticideDetailsList": [],
+                "ServicesDetailsList": [],
+                "BusinessAreaDetailsList": [],
+                "ApplicationDetailsList": [],
+                "LicenseDetailsList": [],
+                "DateRecordDetailsList": [],
+                "ReuesterDetailsList": [],
+                "ScrutinyDetailsList": [],
             }
             for obj in json_objects:
                 for key in data.keys():
