@@ -1,0 +1,44 @@
+<div class="main"><div class="input-section d-flex">
+  <div class="d-flex ng-container">
+    <label for="year-select">Year</label>
+    <ng-select
+      class="ng-select-styles"
+      id="year-select"
+      [items]="years"
+      bindLabel="value"
+      bindValue="id"
+      clearable="false"
+      [appendTo]="'body'"
+      [(ngModel)]="selectedYear"
+    ></ng-select>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Select a start date</mat-label>
+    <input matInput [matDatepicker]="startpicker" [(ngModel)]="selectedStartDate" />
+    <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+    <mat-datepicker #startpicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="end-date-field">
+    <mat-label>Select a end date</mat-label>
+    <input matInput [matDatepicker]="endpicker" [(ngModel)]="selectedEndDate" />
+    <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+    <mat-datepicker #endpicker></mat-datepicker>
+  </mat-form-field>
+
+  <div class="d-flex ng-container">
+    <label for="traning-institutes-select">Training Institutes</label>
+    <ng-select
+      class="ng-select-styles"
+      id="traning-institutes-select"
+      [items]="traningInstitutes"
+      bindLabel="value"
+      bindValue="id"
+      clearable="false"
+      [appendTo]="'body'"
+      [(ngModel)]="selectedInstitute"
+    ></ng-select>
+  </div>
+</div>
+</div>

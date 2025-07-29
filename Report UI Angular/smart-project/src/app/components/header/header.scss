@@ -20,5 +20,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 30px;
+  }
+
+  .myDetailsSection{
+    gap: 5px;
+    align-items: center;
+    color: #fff;
+  }
+
+  button{
+    padding: 0px !important;
+    margin: 0px !important;
+    border: none;
+  }
+
+  mat-icon{
+    background: inherit !important;
+    color: aliceblue;
+    border-bottom: none !important; 
+    background-color: #056839 !important;
+    padding: 0px !important;
   }
 }

@@ -1,21 +1,34 @@
 <header class="headerSection">
   <section class="headerSectionLeft">
-    <h3 class="applicationTitle font-style-title">Web Application - SMART Project</h3>
+    <h3 class="applicationTitle font-style-title">
+      Web Application - SMART Project
+    </h3>
   </section>
   <section class="headerSectionRight">
     <div class="notificationAndFullScreenSection">
-      <button>Notification</button>
-      <button>Full Screen</button>
+      <button><mat-icon fontIcon="notifications"></mat-icon></button>
     </div>
-    <div class="myDetailsSection">
+    <div class="fullScreenButton">
+      <button><mat-icon fontIcon="fullscreen"></mat-icon></button>
+    </div>
+    <div class="myDetailsSection d-flex">
       <!-- Pass logged in user details here -->
       <span>temp pcmu.smart</span>
       <!-- Amd add user image if possible else initial -->
-      <img src="assets/images/user.png" alt="User Image" class="user-image" />
+      <img
+        *ngIf="img; else noImage"
+        src="assets/images/user.png"
+        alt="User Image"
+        class="user-image"
+      />
+
+      <ng-template #noImage>
+        <mat-icon class="user-image">account_circle</mat-icon>
+      </ng-template>
     </div>
     <div class="logoutButtonSectiom">
       <!-- Add a power button image -->
-      <button>Log In</button>
+      <button><mat-icon fontIcon="power_settings_new"></mat-icon></button>
     </div>
   </section>
 </header>
