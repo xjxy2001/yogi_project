@@ -17,6 +17,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Select a start date</mat-label>
       <input
+        #startDateInput
         matInput
         [matDatepicker]="startpicker"
         [(ngModel)]="selectedStartDate"
@@ -57,13 +58,27 @@
     </div>
   </div>
   <div class="table-section d-flex">
-    <p>The Table will be displayed after the integration of UI</p>
+    <!-- <p>The Table will be displayed after the integration of UI</p>
     <ol>
       <li>Required Things</li>
       <li>API Endpoint</li>
       <li>DB access (To Load related data)</li>
       <li>Access Permissions to the API</li>
       <li>Any specific changes? (If any)</li>
-    </ol>
+    </ol> -->
+    <div class="table-section d-flex">
+      <table *ngIf="apiData && apiData.length">
+        <thead>
+          <tr>
+            <th *ngFor="let key of apiData[0] | keyvalue">{{ key.key }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of apiData">
+            <td *ngFor="let key of item | keyvalue">{{ key.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

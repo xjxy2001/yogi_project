@@ -1,20 +1,21 @@
-
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
 // components according to the Material 3 design spec.
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
 
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
@@ -27,7 +28,7 @@ html {
   background-color: #eaeaea;
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
-}/* You can add global styles to this file, and also import other style files */
+} /* You can add global styles to this file, and also import other style files */
 .font-style-title {
   font-family: "Roboto", sans-serif;
   color: #f8f9fa;
@@ -44,41 +45,111 @@ html {
 
 .ng-container {
   display: flex;
-  gap: 10px;
+  gap: 6px;
+  min-width: 200px;
   align-items: center;
-  margin: 15px 10px;
+  margin-bottom: 25px;
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
 }
 
-// Base styling for the ng-select input box
+// ng-select styling
 .ng-select.ng-select-styles {
-  display: flex;
-  gap: 10px;
-  padding: 2px 5px;
-  border: 1px solid #74777f;
-  border-radius: 4px;
-  height: 4rem;
-  align-items: center;
-  justify-content: space-between;
-  width: clamp(100px, 200px, 250px);
+  width: 100%;
   font-size: 14px;
-  cursor: pointer;
+  z-index: 1001;
+
+  .ng-select-container {
+    height: 3.4rem;
+    border: 1px solid #c2c2c2;
+    border-radius: 4px;
+    padding: 0 10px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.2s ease-in-out;
+
+    .ng-value {
+      margin-right: auto;
+    }
+
+    .ng-arrow-wrapper {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &.ng-select-focused .ng-select-container {
+    border-color: #25c074;
+    box-shadow: 0 0 0 2px rgba(37, 192, 116, 0.2);
+  }
+
+  .ng-dropdown-panel {
+    z-index: 2000;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin-top: 4px;
+    background-color: green !important;
+
+    .ng-dropdown-panel-items .ng-option {
+      padding: 10px;
+      font-size: 14px;
+      background-color: green;
+      color: white;
+
+      &.ng-option-selected,
+      &.ng-option-marked {
+        background-color: #006400;
+      }
+
+      &:hover {
+        background-color: #228b22;
+      }
+    }
+  }
 }
 
-// Dropdown option styling
-.ng-dropdown-panel .ng-option {
-  display: flex;
-  padding: 5px 2px;
-  margin: 10px 5px;
-  font-size: 14px;
-  border-bottom: 1px solid #eee;
-  align-items: center;
-  justify-self: center;
+// Override Angular Material Datepicker Fields
+mat-form-field {
+  min-width: 200px;
+  max-width: 250px;
+  width: 100%;
+
+  .mat-form-field-outline {
+    color: #c2c2c2;
+  }
+
+  .mat-form-field-label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .mat-input-element {
+    padding: 10px 0;
+  }
+
+  .mat-datepicker-toggle {
+    margin-right: 4px;
+  }
 }
 
-.ng-dropdown-panel .ng-option:hover {
-  background-color: #e6f7ff;
-  color: #1890ff;
+// Optional: Override for selected state (material input focus)
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #25c074;
+  border-color: #25c074;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

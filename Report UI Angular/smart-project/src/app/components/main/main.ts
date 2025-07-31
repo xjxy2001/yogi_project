@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core'; // Ensure this is imported
+import { Fetchvanamatidata } from '../../service/fetchvanamatidata';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main',
@@ -14,15 +16,44 @@ import { MatNativeDateModule } from '@angular/material/core'; // Ensure this is 
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
+    CommonModule,
   ],
   templateUrl: './main.html',
-  styleUrl: './main.scss',
+  styleUrls: ['./main.scss'],
 })
-export class Main {
+export class MainComponent implements OnInit {
   selectedYear: number = 0;
   selectedInstitute: number = 0;
   selectedStartDate: Date | null = null;
   selectedEndDate: Date | null = null;
+  apiData: any[] = [];
+
+  constructor(private fetchDataService: Fetchvanamatidata) {}
+
+  ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    const params = {
+      year: this.selectedYear,
+      institute: this.selectedInstitute,
+      startDate: this.selectedStartDate,
+      endDate: this.selectedEndDate,
+    };
+
+    this.fetchDataService.getData(params).subscribe((data: any) => {
+      // If Excel fallback, convert array-of-arrays to array-of-objects for table
+      if (Array.isArray(data) && Array.isArray(data[0])) {
+        const [headers, ...rows] = data;
+        this.apiData = rows.map((row) =>
+          headers.reduce((obj, key, i) => ({ ...obj, [key]: row[i] }), {})
+        );
+      } else {
+        this.apiData = data;
+      }
+    });
+  }
 
   years = [
     { id: 0, value: 'Select Year' },
